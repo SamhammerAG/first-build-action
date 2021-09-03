@@ -13,7 +13,7 @@ async function run(): Promise<void> {
         const repository: string = process.env.GITHUB_REPOSITORY as string;
         const [owner, repo] = repository.split("/");
 
-        const workflows = await octokit.actions.listRepoWorkflows({ owner, repo });
+        const workflows = await octokit.rest.actions.listRepoWorkflows({ owner, repo });
         const workflow_id = workflows.data.workflows.find(w => w.name === inputs.workflow)?.id;
 
         if (!workflow_id) {
@@ -23,7 +23,7 @@ async function run(): Promise<void> {
             core.info(`Discovered workflowId for search: ${workflow_id}`);
         }
 
-        const response = await octokit.actions.listWorkflowRuns({ owner, repo, workflow_id, branch: inputs.branch, status: 'success', per_page: 1 });
+        const response = await octokit.rest.actions.listWorkflowRuns({ owner, repo, workflow_id, branch: inputs.branch, status: 'success', per_page: 1 });
         const isFirstWorkflowRun = response.data.total_count == 0;
 
         core.info(`Discovered firstRun: ${isFirstWorkflowRun}`);
