@@ -20,5 +20,5 @@ jobs:
       uses: SamhammerAG/first-build-action@master
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-        workflow: test.yml
+        workflow: test
         branch: ${{ steps.branch.outputs.branch }}
