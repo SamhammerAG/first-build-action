@@ -1,0 +1,24 @@
+name: test
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: test
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      branch: ${{ steps.version.outputs.branch }}
+    steps:
+    - name: checkout
+      uses: actions/checkout@v2
+    - name: branch
+      id: branch
+      run: echo "::set-output name=branch::${GITHUB_REF##*/}" | tr '[:upper:]' '[:lower:]'
+    - name: first run
+      id: first_run
+      uses: SamhammerAG/first-build-action@master
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        workflow: test.yml
+        branch: ${{ steps.branch.outputs.branch }}
