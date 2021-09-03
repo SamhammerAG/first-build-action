@@ -26,6 +26,7 @@ async function run(): Promise<void> {
         const response = await octokit.actions.listWorkflowRuns({ owner, repo, workflow_id, branch: inputs.branch, status: 'success', per_page: 1 });
         const isFirstWorkflowRun = response.data.total_count == 0;
 
+        core.info(`Discovered firstRun: ${isFirstWorkflowRun}`);
         core.setOutput('firstRun', isFirstWorkflowRun);
     } catch (error) {
         core.setFailed((error as Error).message);

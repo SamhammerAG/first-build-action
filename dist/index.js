@@ -6244,6 +6244,7 @@ function run() {
             }
             const response = yield octokit.actions.listWorkflowRuns({ owner, repo, workflow_id, branch: inputs.branch, status: 'success', per_page: 1 });
             const isFirstWorkflowRun = response.data.total_count == 0;
+            _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(`Discovered firstRun: ${isFirstWorkflowRun}`);
             _actions_core__WEBPACK_IMPORTED_MODULE_0__.setOutput('firstRun', isFirstWorkflowRun);
         }
         catch (error) {
