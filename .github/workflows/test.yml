@@ -17,7 +17,7 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
         workflow: test
         branch: ${{ steps.branch.outputs.branch }}
-    - if: steps.first_run.outputs.firstRun == 'true'
+    - if: steps.first_run.outputs.first_run == 'true'
       run: echo "Do something on first run"
-    - if: steps.first_run.outputs.firstRun == 'false'
+    - if: steps.first_run.outputs.first_run == 'false'
       run: echo "Do something on other runs"
