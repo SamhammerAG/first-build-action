@@ -8,7 +8,7 @@ This action searches successful workflow-runs for the given workflow-name and br
     - id: branch
       run: echo "::set-output name=branch::${GITHUB_REF##*/}" | tr '[:upper:]' '[:lower:]'
     - id: first_run
-      uses: SamhammerAG/first-build-action@v1
+      uses: SamhammerAG/first-build-action@v2
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         workflow: test
